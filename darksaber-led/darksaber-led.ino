@@ -134,38 +134,33 @@ x = x + 1;
               break;
           case 5:
           Serial.println("purple2");
-//              purple();
-          
               Fire(55,120,15);
               break;
           default:
           Serial.println("purple3");
-//              purple();
               rainbowCycle(15);
               break;
       }
   
  }
-//}
 
 void red() {
-  strip.fill(strip.Color(255, 1, 1));
+  strip.fill(strip.Color(255, 0, 0));
   showStrip();
 }
 
 void Green() {
-  strip.fill(strip.Color(1, 255, 1));
+  strip.fill(strip.Color(0, 255, 0));
   showStrip();
 }
 
 void Blue() {
-//  strip.fill(strip.Color(05, 0, 255));
-  strip.fill(strip.Color(1, 255, 1));
+  strip.fill(strip.Color(0, 0, 255));
   showStrip();
 }
 
 void purple() {
-  strip.fill(strip.Color(153, 1, 204));
+  strip.fill(strip.Color(128,0,128));
   showStrip();
 }
 
