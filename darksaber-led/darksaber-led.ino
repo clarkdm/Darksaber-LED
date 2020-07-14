@@ -9,6 +9,12 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ
 
 
 int x = 1;
+
+int buttonState;             
+int lastButtonState = LOW; 
+unsigned long lastDebounceTime = 0;  
+unsigned long debounceDelay = 50; 
+
 void setup() {
 //  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
  
@@ -16,6 +22,8 @@ pinMode(Button_PIN,INPUT_PULLUP);
 
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+
+  Serial.begin(9600);
 }
 
 
@@ -47,61 +55,112 @@ pinMode(Button_PIN,INPUT_PULLUP);
 //  fill_rainbow (leds ,90 ,0, 8);
 //}
 
-void loop() {
+
+
+//void loop() {
+// 
+//  int reading = digitalRead(Button_PIN);
+//
+// Serial.println(reading);
+//  if (reading != lastButtonState) {
+//    
+//    lastDebounceTime = millis();
+//  }
+//
+//  if ((millis() - lastDebounceTime) > debounceDelay) {
+//   
+//    if (reading != buttonState) {
+//      buttonState = reading;
+//
+//      
+//      if (buttonState == HIGH) {
+//        x = x + 1;
+//        if (x > 6){
+//          x = 1;
+//        }
+//      }
+//    }
+//  }
+//
+// 
+//  ledState();
+//
+// 
+//  lastButtonState = reading;
+//}
+
+
+//
+void loop() { 
   
-  if(!digitalRead(Button_PIN)){
-    x = x + 1;
+  if(digitalRead(Button_PIN)== 0){
     
+//    Blue();
+    delay(50);
+    if(digitalRead(Button_PIN)== 1){
+//      red();
+x = x + 1;
+    }
   }
   if (x == 7){
     x = 1;
   }
+  ledState();
+ }
   
-  switch (x)
-      {
+ void ledState(){
+  Serial.println(x);
+  switch (x) {
           case 1:
+          Serial.println("Blue");
               Blue();
               break;
           case 2:
+          Serial.println("red");
               red();
               break;
           case 3:
+          Serial.println("Green");
               Green();
               break;
           case 4:
+          Serial.println("purple");
               purple();
               break;
           case 5:
-              purple();
+          Serial.println("purple2");
+//              purple();
           
-//              Fire(55,120,15);
+              Fire(55,120,15);
               break;
           default:
-              purple();
-//              rainbowCycle(15);
+          Serial.println("purple3");
+//              purple();
+              rainbowCycle(15);
               break;
       }
   
-  
-}
+ }
+//}
 
 void red() {
-  strip.fill((255, 0, 0));
+  strip.fill(strip.Color(255, 1, 1));
   showStrip();
 }
 
 void Green() {
-  strip.fill((0, 255, 0));
+  strip.fill(strip.Color(1, 255, 1));
   showStrip();
 }
 
 void Blue() {
-  strip.fill((05, 0, 255));
+//  strip.fill(strip.Color(05, 0, 255));
+  strip.fill(strip.Color(1, 255, 1));
   showStrip();
 }
 
 void purple() {
-  strip.fill((153, 0, 204));
+  strip.fill(strip.Color(153, 1, 204));
   showStrip();
 }
 
